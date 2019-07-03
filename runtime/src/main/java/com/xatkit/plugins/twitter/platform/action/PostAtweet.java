@@ -36,7 +36,8 @@ public class PostAtweet extends RuntimeAction<TwitterPlatform> {
 	/**
 	 * Post a tweet with the provided {@code content}.
 	 * <p>
-	 * This action opens a new conection to with twiter and posts a tweet.
+	 * This action opens a new conection to with twiter and posts a tweet with the content
+	 * specified by the chatbot.
 	 *
 	 * @return 0 if no errors; 1 if errors
 	 */
@@ -45,7 +46,8 @@ public class PostAtweet extends RuntimeAction<TwitterPlatform> {
 		int error = 0;
 		Twitter twitterService = this.runtimePlatform.getTwitterService();
 		/*
-		 * Gets the twitter API instances to post a tweet.
+		 * Gets the twitter API instance and calls updateStatus method
+		 * to post a tweet with content {@code content}.
 		 */
 		try {
 			twitterService.updateStatus(this.content);

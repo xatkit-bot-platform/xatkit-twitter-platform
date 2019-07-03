@@ -15,24 +15,24 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 /**
- * Adds a property to the provided {@code node}.
+ * Seaches for tweets with the provided search terms {@code query}.
  * <p>
  * This class relies on the {@link TwitterPlatform}'s to integrate with twitter.
  */
 public class LookForTweets extends RuntimeAction<TwitterPlatform> {
 	/**
-	 * The query for tweets.
+	 * The query of the search for tweets.
 	 */
 	private String query;
 
 	/**
-	 * Look for tweets {@link LookForTweets} action with the provided
+	 * Seach for tweets {@link LookForTweets} action with the provided
 	 * {@code runtimePlatform}, {@code session}, {@code query}.
 	 *
 	 * @param runtimePlatform the {@link TwitterPlatform} containing the database to
 	 *                        store the created property
 	 * @param session         the {@link XatkitSession} associated to this action
-	 * @param query           the query to look for tweets
+	 * @param query           the query to search for tweets
 	 */
 	public LookForTweets(TwitterPlatform runtimePlatform, XatkitSession session, String query) {
 		super(runtimePlatform, session);
@@ -40,9 +40,10 @@ public class LookForTweets extends RuntimeAction<TwitterPlatform> {
 	}
 
 	/**
-	 * Post a tweet with the provided {@code content}.
 	 * <p>
-	 * This action opens a new conection to with twiter and posts a tweet.
+	 * This action opens a new conection to with twiter and searches for 
+	 * tweets with search terms {@code query} .
+	 * 
 	 *
 	 * @return 0 if no errors; 1 if errors
 	 */
@@ -52,7 +53,8 @@ public class LookForTweets extends RuntimeAction<TwitterPlatform> {
 		Twitter twitterService = this.runtimePlatform.getTwitterService();
 		List<Attachment> attachments = new ArrayList<>();
 		/*
-		 * Gets the twitter API instances to lookfor tweets.
+		 * Gets the twitter API instance and calls search method
+		 * to retrieve tweets that are the result of the search.
 		 */
 		try {
 			Query query = new Query(this.query);

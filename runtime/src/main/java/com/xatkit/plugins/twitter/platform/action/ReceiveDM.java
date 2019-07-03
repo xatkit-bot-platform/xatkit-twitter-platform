@@ -15,14 +15,15 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 /**
- * Shows the DM received.
+ * Shows the latest 50 incoming direct menssages.
  * <p>
- * This class relies on the {@link TwitterPlatform}'s to integrate with twitter.
+ * This class relies on the {@link TwitterPlatform}'s {@link twitter4j.Twitter}
+ * to integrate with twitter.
  */
 public class ReceiveDM extends RuntimeAction<TwitterPlatform> {
 
 	/**
-	 * Shows the received DMs {@link ReceiveDM} with the provided
+	 * Shows the latest 50 incoming direct menssages {@link ReceiveDM} with the provided
 	 * {@code runtimePlatform}, {@code session}.
 	 *
 	 * @param runtimePlatform the {@link TwitterPlatform} containing the database to
@@ -34,12 +35,11 @@ public class ReceiveDM extends RuntimeAction<TwitterPlatform> {
 	}
 
 	/**
-	 * LookForReceived DMs.
-	 * <p>
-	 * This action opens a new conection to with twiter and looks for the latest
-	 * received DMs. Can only show up to 50 DMs
+	 * Retrieves the latest incoming direct messages.
+	 * There's a limit of 50 direct messages that can be retrieved.
 	 * 
 	 * @return 0 if no errors; a string with the DMs formated for Slack
+	 * // TODO make formating flexibe create a formatter that is a parameter.
 	 */
 	@Override
 	protected Object compute() {
@@ -50,7 +50,8 @@ public class ReceiveDM extends RuntimeAction<TwitterPlatform> {
 		JSONObject jsonResult = new JSONObject();
 		JSONObject jsonContent = null;
 		/*
-		 * Gets the twitter API instances to lookfor tweets.
+		 * Gets the twitter API instance and calls getDirectMessages method
+		 * to retrieve the latest 50 incoming direct messages.
 		 */
 		try {
 			DirectMessageList DMList = twitterService.getDirectMessages(50);
