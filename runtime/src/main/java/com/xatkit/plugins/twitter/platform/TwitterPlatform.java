@@ -19,10 +19,10 @@ import twitter4j.auth.AccessToken;
  * <i><project_root>/platform/twitterPlatform*.xmi</i>, and provides the
  * following actions:
  * <ul>
- * <li>{@link PostAtweet}: posts a twit</li>
- * <li>{@link SendDM}: posts a twit</li>
- * <li>{@link ReceiveDM}: posts a twit</li>
- * <li>{@link LookForTweets}: posts a twit</li>
+ * <li>{@link PostAtweet}: posts a tweet</li>
+ * <li>{@link SendDM}: posts a tweet</li>
+ * <li>{@link ReceiveDM}: posts a tweet</li>
+ * <li>{@link LookForTweets}: posts a tweet</li>
  * </ul>
  */
 public class TwitterPlatform extends RuntimePlatform {

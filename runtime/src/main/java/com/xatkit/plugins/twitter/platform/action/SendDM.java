@@ -8,7 +8,7 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 /**
- * Sends a tweet to a user {@code user}.
+ * Sends a direct message to a user whose username is {@code user}.
  * <p>
  * This class relies on the {@link TwitterPlatform}'s {@link twitter4j.Twitter}
  * to integrate with twitter.
@@ -21,7 +21,7 @@ public class SendDM extends RuntimeAction<TwitterPlatform> {
 	private String user;
 
 	/**
-	 * Sends a tweet to a user {@link SendDM} action with the provided
+	 * Sends a direct messaage to a user {@link SendDM} action with the provided
 	 * {@code runtimePlatform}, {@code session}, {@code user}, {@code text}.
 	 *
 	 * @param runtimePlatform the {@link TwitterPlatform} containing the database to
@@ -37,7 +37,8 @@ public class SendDM extends RuntimeAction<TwitterPlatform> {
 	}
 
 	/**
-	 * Sends a DM to a user {@code user} with {@code text}.
+	 * Sends a Direct Message to a user whose username is {@code user}.
+	 * The content of the message is {@code text}.
 	 * <p>
 	 * 
 	 * @return 0 if no errors; 1 if errors
@@ -47,7 +48,8 @@ public class SendDM extends RuntimeAction<TwitterPlatform> {
 		int error = 0;
 		Twitter twitterService = this.runtimePlatform.getTwitterService();
 		/*
-		 * Gets the twitter API instances to lookfor tweets.
+		 * Gets the twitter API instance and calls the sendDirectMessage method
+		 * to send a direct message to the user @code user} with the content {@code text}.
 		 */
 		try {
 			twitterService.sendDirectMessage(this.user, this.text);
