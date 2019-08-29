@@ -1,44 +1,37 @@
-# twitter-platform
+Xatkit Twitter Platform
+=====
+
+[![License Badge](https://img.shields.io/badge/license-EPL%202.0-brightgreen.svg)](https://opensource.org/licenses/EPL-2.0)
+[![Build Status](https://travis-ci.com/xatkit-bot-platform/xatkit-uml-platform.svg?branch=master)](https://travis-ci.com/xatkit-bot-platform/xatkit-uml-platform)
+
 Send and receive messages from Twitter, and search or post Tweets.
 
-## Overview
+## Providers
 
-There are 4 twitter actions developed for this implementation:
-- **PostATweet** to ask the chatbot to post a tweet on your behalf with an specific content.
-- **SendDM** to ask the chatbot to send a direct message on your behalf with an specific content.
-- **ReceiveDM** to ask the chatbot to show your latest direct messages sent to you.
-- **LookForTweets** to ask the chatbot to show you a series of tweet related to a search term that is indicated to the chatbot.
+The Twitter platform does not define any provider.
 
-## Installation
+## Actions
 
-You need to have a working Xatkit installation to use this platform. You can download the latest release [here](https://xatkit-bot-platform.github.io/xatkit-docs/releases/v1.0.1/update/), or build Xatkit from sources by following [this tutorial](https://github.com/xatkit-bot-platform/xatkit/wiki/Installation).
+| Action  | Parameters | Return                                  | Return Type | Description                                     |
+| ------- | ---------- | --------------------------------------- | ----------- | ----------------------------------------------- |
+| PostATweet | - `content` (**String**): the content of the tweet to post          | `0` if the tweet has been posted, `1` otherwise   | Integer      | Posts a tweet on behalf of the configured user with the provided `content` |
+| SendDM | - `user` (**String**): the twitter user to send a direct message to<br/>- `text` (**String**): the content of the direct message | `0` if the direct message has been sent, `1` otherwise | Integer | Sends a direct message to the provided `user` with the given `text` |
+| ReceiveDM | - | A list of Slack [Attachments](https://github.com/seratch/jslack) containing the latest direct messages received | [List\<Attachment\>](https://github.com/seratch/jslack) | Retrieves the latest direct messages received by the configured user |
+| LookForTweets | - `query` (**String**): the search terms used to retrieve tweets | A list of Slack [Attachments](https://github.com/seratch/jslack) containing the tweets matching the provided `query` | [List\<Attachment\>](https://github.com/seratch/jslack) | Retrieves a series of tweets matching the provided search `query` |
 
-You also need to build the Twitter platform jar from the sources. You can do it by running the following commands from the project's root directory:
+## Options
 
-```bash
-cd runtime
-mvn install
-```
-This will create a `twitter-platform-jar-with-dependencies.jar` file in the `runtime/target` folder.
+The Twitter platform supports the following configuration options
 
-## Execution
+| Key                  | Values | Description                                                  | Constraint    |
+| -------------------- | ------ | ------------------------------------------------------------ | ------------- |
+| `xatkit.twitter.consumerKey` | String | The consumer key of the Twitter app used by Xatkit to deploy the bot | **Mandatory** |
+| `xatkit.twitter.consumerSecret` | String | The consumer secret of the Twitter app used by Xatkit to deploy the bot | **Mandatory** |
+| `xatkit.twitter.accessToken` | String | The access token of the Twitter app used by Xatkit to deploy the bot | **Mandatory** |
+| `xatkit.twitter.accessSecretToken` | String | The access token secret of the Twitter app used by Xatkit to deploy the bot | **Mandatory** |
 
-The Twitter platform is not part of Xatkit core platforms, and need to be manually added to the classpath when starting the application. You can run this command (windows version) to run Xatkit with the Twitter platform.
+To fill these options you need to have a [Twitter developer account](https://developer.twitter.com/) and create an app. The different keys and access tokens can be found at this location: https://developer.twitter.com/en/apps/{YOURAPPID}.
 
-```bash
-java -cp "xatkit.jar;runtime/target/twitter-platform-jar-with-dependencies.jar" com.xatkit.Xatkit TwitterBot.properties
-```
+**Note**
 
-> **Useful Tips** You can provide an absolute path for the `jar` files to include in the classpath.
-
-## Requirements
-
-- **twitter** you'll need to create a twitter developer account and create an APP https://developer.twitter.com/}
-- **SendDM** the user that you are trying to reach must be someone who is following you and that you also follow.
-- **ReceiveDM** you'll need to set a permission to be able to do this from the chatbot. This permission is set in the user account that is used by the chatbot (https://developer.twitter.com/en/apps/{YOURAPPID}).
-- **Propierties** The properties file has to include these extra parameters:
-    - xatkit.twitter.consumerKey 
-    - xatkit.twitter.consumerSecret 
-    - xatkit.twitter.accessToken
-    - xatkit.twitter.accessSecretToken 
-These can be found on the https://developer.twitter.com/en/apps/{YOURAPPID} under keys and tokens tab
+*SendDM* and *ReceiveDM* actions require additional permissions that must be set in your app settings (direct message permissions are not granted by default).
