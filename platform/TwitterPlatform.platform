@@ -6,7 +6,9 @@ actions {
 
 	PostAtweet(content)
 	LookForTweets(query)
+	LookForTweets(query, resultsPerPage)
 	SendDM(user,text)
 	ReceiveDM
+	ReceiveDM(messagesPerPage)
 
 }

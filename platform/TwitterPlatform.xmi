@@ -6,9 +6,16 @@
   <actions name="LookForTweets">
     <parameters key="query"/>
   </actions>
+  <actions name="LookForTweets">
+    <parameters key="query"/>
+    <parameters key="resultsPerPage"/>
+  </actions>
   <actions name="SendDM">
     <parameters key="user"/>
     <parameters key="text"/>
   </actions>
   <actions name="ReceiveDM"/>
+  <actions name="ReceiveDM">
+    <parameters key="messagesPerPage"/>
+  </actions>
 </platform:PlatformDefinition>
