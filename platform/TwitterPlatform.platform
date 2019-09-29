@@ -10,5 +10,8 @@ actions {
 	SendDM(user,text)
 	ReceiveDM
 	ReceiveDM(messagesPerPage)
+	GetTrends
+	GetTrends(woeid)
+	GetTrends(locationName)
 
 }

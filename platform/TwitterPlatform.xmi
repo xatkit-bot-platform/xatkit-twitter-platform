@@ -18,4 +18,11 @@
   <actions name="ReceiveDM">
     <parameters key="messagesPerPage"/>
   </actions>
+  <actions name="GetTrends"/>
+  <actions name="GetTrends">
+    <parameters key="woeid"/>
+  </actions>
+  <actions name="GetTrends">
+    <parameters key="locationName"/>
+  </actions>
 </platform:PlatformDefinition>
