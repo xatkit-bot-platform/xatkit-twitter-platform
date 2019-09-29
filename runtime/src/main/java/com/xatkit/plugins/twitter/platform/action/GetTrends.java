@@ -135,6 +135,7 @@ public class GetTrends extends RuntimeAction<TwitterPlatform> {
      *
      * @param locationName the name of the location to search the WOEID
      */
+
     private Integer getWoeIdByLocationName(String locationName) {
         Twitter twitterService = this.runtimePlatform.getTwitterService();
         Integer woeid = -1;
