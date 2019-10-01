@@ -5,6 +5,7 @@ import com.xatkit.core.platform.RuntimePlatform;
 import com.xatkit.plugins.twitter.platform.action.PostAtweet;
 import com.xatkit.plugins.twitter.platform.action.SendDM;
 import com.xatkit.plugins.twitter.platform.action.ReceiveDM;
+import com.xatkit.plugins.twitter.TwitterUtils;
 import com.xatkit.plugins.twitter.platform.action.LookForTweets;
 
 import org.apache.commons.configuration2.Configuration;
@@ -26,26 +27,16 @@ import twitter4j.auth.AccessToken;
  * </ul>
  */
 public class TwitterPlatform extends RuntimePlatform {
-	/**
-	 * The {@link Configuration} keys used to store the tokens needed to connect to
-	 * Twitter app.
-	 * <p>
-	 * The provided path can be relative or absolute.
-	 */
-	public static final String TWITTER_CONSUMER_KEY = "xatkit.twitter.consumerKey";
-	public static final String TWITTER_CONSUMER_SECRET = "xatkit.twitter.consumerSecret";
-	public static final String TWITTER_ACCESS_TOKEN_KEY = "xatkit.twitter.accessToken";
-	public static final String TWITTER_ACCESS_SECRET_TOKEN_KEY = "xatkit.twitter.accessSecretToken";
 
 	private Twitter twitterService;
 
 	public TwitterPlatform(XatkitCore XatkitCore, Configuration configuration) {
 		super(XatkitCore, configuration);
 		twitterService = TwitterFactory.getSingleton();
-		twitterService.setOAuthConsumer(configuration.getString(TWITTER_CONSUMER_KEY),
-				configuration.getString(TWITTER_CONSUMER_SECRET));
-		AccessToken accessToken = new AccessToken(configuration.getString(TWITTER_ACCESS_TOKEN_KEY),
-				configuration.getString(TWITTER_ACCESS_SECRET_TOKEN_KEY));
+		twitterService.setOAuthConsumer(configuration.getString(TwitterUtils.TWITTER_CONSUMER_KEY),
+				configuration.getString(TwitterUtils.TWITTER_CONSUMER_SECRET));
+		AccessToken accessToken = new AccessToken(configuration.getString(TwitterUtils.TWITTER_ACCESS_TOKEN_KEY),
+				configuration.getString(TwitterUtils.TWITTER_ACCESS_SECRET_TOKEN_KEY));
 		twitterService.setOAuthAccessToken(accessToken);
 	}
 
