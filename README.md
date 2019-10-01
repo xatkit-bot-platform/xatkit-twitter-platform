@@ -19,7 +19,10 @@ The Twitter platform does not define any provider.
 | PostATweet | - `content` (**String**): the content of the tweet to post          | `0` if the tweet has been posted, `1` otherwise   | Integer      | Posts a tweet on behalf of the configured user with the provided `content` |
 | SendDM | - `user` (**String**): the twitter user to send a direct message to<br/>- `text` (**String**): the content of the direct message | `0` if the direct message has been sent, `1` otherwise | Integer | Sends a direct message to the provided `user` with the given `text` |
 | ReceiveDM | - | A list of Slack [Attachments](https://github.com/seratch/jslack) containing the latest direct messages received | [List\<Attachment\>](https://github.com/seratch/jslack) | Retrieves the latest direct messages received by the configured user |
+| ReceiveDM |  - `messagesPerPage` (**Integer**): the number of messages to retrieve per page up to a maximum of 50 | A list of Slack [Attachments](https://github.com/seratch/jslack) containing the latest `messagesPerPage` direct messages received | [List\<Attachment\>](https://github.com/seratch/jslack) | Retrieves the latest `messagesPerPage` direct messages received by the configured user |
 | LookForTweets | - `query` (**String**): the search terms used to retrieve tweets | A list of Slack [Attachments](https://github.com/seratch/jslack) containing the tweets matching the provided `query` | [List\<Attachment\>](https://github.com/seratch/jslack) | Retrieves a series of tweets matching the provided search `query` |
+| LookForTweets | - `query` (**String**): the search terms used to retrieve tweets<br/>- `resultsPerPage` (**Integer**): the number of tweets to retrieve per page up to a maximum of 100  | A list of Slack [Attachments](https://github.com/seratch/jslack) containing the tweets matching the provided `query` | [List\<Attachment\>](https://github.com/seratch/jslack) | Retrieves a series of tweets matching the provided search `query` |
+
 
 ## Options
 

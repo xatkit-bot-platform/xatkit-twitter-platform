@@ -1,5 +1,8 @@
 package com.xatkit.plugins.twitter.platform.action;
 
+import static fr.inria.atlanmod.commons.Preconditions.checkArgument;
+import static java.util.Objects.nonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,8 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 /**
- * Seaches for tweets with the provided search terms {@code query}.
+ * Searches for tweets with the provided search terms {@code query}.
+ * Right now it can only return the first page of the results obtained.
  * <p>
  * This class relies on the {@link TwitterPlatform}'s to integrate with twitter.
  */
@@ -25,6 +29,12 @@ public class LookForTweets extends RuntimeAction<TwitterPlatform> {
 	 */
 	private String query;
 
+	/**
+	 * The number of tweets to return per page, up to a maximum of 100. 
+	 * Defaults to 15. 
+	 */
+	private Integer resultsPerPage;	
+	
 	/**
 	 * Seach for tweets {@link LookForTweets} action with the provided
 	 * {@code runtimePlatform}, {@code session}, {@code query}.
@@ -36,15 +46,38 @@ public class LookForTweets extends RuntimeAction<TwitterPlatform> {
 	 */
 	public LookForTweets(TwitterPlatform runtimePlatform, XatkitSession session, String query) {
 		super(runtimePlatform, session);
+        checkArgument(nonNull(query) && !query.isEmpty(), "Cannot construct a %s action with the provided query" +
+                " %s, expected a non-null and not empty String", this.getClass().getSimpleName(), query);
 		this.query = query;
+		this.resultsPerPage = 15;
+	}
+	
+	/**
+	 * Seach for tweets {@link LookForTweets} action with the provided
+	 * {@code runtimePlatform}, {@code session}, {@code query}.
+	 *
+	 * @param runtimePlatform the {@link TwitterPlatform} containing the database to
+	 *                        store the created property
+	 * @param session         the {@link XatkitSession} associated to this action
+	 * @param query           the query to search for tweets
+	 * @param resultsPerPage  the number of tweets to return per page
+	 */
+	public LookForTweets(TwitterPlatform runtimePlatform, XatkitSession session, String query, Integer resultsPerPage) {
+		super(runtimePlatform, session);
+        checkArgument(nonNull(query) && !query.isEmpty(), "Cannot construct a %s action with the provided query" +
+                " %s, expected a non-null and not empty String", this.getClass().getSimpleName(), query);
+        checkArgument(nonNull(resultsPerPage) && (resultsPerPage > 0) && (resultsPerPage <= 100), "Cannot construct a %s "
+        		+ "action with the provided resultsPerPage %s, expected a non-null, greater than 0 and less than or equal to 100 integer",
+        		this.getClass().getSimpleName(), resultsPerPage);
+		this.query = query;
+		this.resultsPerPage = resultsPerPage;
 	}
 
 	/**
 	 * <p>
 	 * This action opens a new conection to with twiter and searches for 
-	 * tweets with search terms {@code query} .
+	 * tweets with search terms {@code query} and return {@code resultsPerPage} resultss.
 	 * 
-	 *
 	 * @return 0 if no errors; 1 if errors
 	 */
 	@Override
@@ -58,6 +91,8 @@ public class LookForTweets extends RuntimeAction<TwitterPlatform> {
 		 */
 		try {
 			Query query = new Query(this.query);
+			query.setCount(resultsPerPage);
+			
 			QueryResult queryResult = twitterService.search(query);
 			List<Status> tweetsList = queryResult.getTweets();
 			if (!tweetsList.isEmpty()) {
