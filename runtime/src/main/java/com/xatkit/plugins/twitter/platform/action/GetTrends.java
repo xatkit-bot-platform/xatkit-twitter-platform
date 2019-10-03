@@ -5,7 +5,13 @@ import java.util.List;
 import static fr.inria.atlanmod.commons.Preconditions.checkArgument;
 import static java.util.Objects.nonNull;
 
-import com.github.seratch.jslack.api.model.Attachment;
+import com.github.seratch.jslack.api.model.block.LayoutBlock;
+import com.github.seratch.jslack.api.model.block.SectionBlock;
+import com.github.seratch.jslack.api.model.block.SectionBlock.SectionBlockBuilder;
+import com.github.seratch.jslack.api.model.block.composition.TextObject;
+import com.github.seratch.jslack.api.model.block.composition.MarkdownTextObject.MarkdownTextObjectBuilder;
+import com.github.seratch.jslack.api.model.block.composition.MarkdownTextObject;
+import com.github.seratch.jslack.api.model.block.composition.PlainTextObject;
 import com.xatkit.core.platform.action.RuntimeAction;
 import com.xatkit.core.session.XatkitSession;
 import com.xatkit.plugins.twitter.platform.TwitterPlatform;
@@ -92,33 +98,48 @@ public class GetTrends extends RuntimeAction<TwitterPlatform> {
         String result = "0";
         Twitter twitterService = this.runtimePlatform.getTwitterService();
         List<Trend> trendsList = new ArrayList<>();
-        List<Attachment> attachments = new ArrayList<>();
+        List<LayoutBlock> layoutBlocks = new ArrayList<>();
 
         // First WOEID is 1 which correspond to "Worldwide"
         if (woeid > 0) {
             try {
                 Trends trends = twitterService.getPlaceTrends(woeid);
                 if (trends.getTrends().length > 0) {
+                    SectionBlockBuilder sectionBlockBuilder = SectionBlock.builder();
+                    sectionBlockBuilder.text(PlainTextObject.builder().text("Trending topics:").build());
+                    List<TextObject> fields = new ArrayList<>();
+                    int idx = 1;
+
                     for (Trend trend : trends.getTrends()) {
                         trendsList.add(trend);
 
-                        Attachment.AttachmentBuilder attachmentBuilder = Attachment.builder();
+                        // Blocks can't have more than 10 fields, so after 10 trends, we add a new block
+                        if ((idx > 1) && ((idx - 1) % 10) == 0) {
+                            sectionBlockBuilder.fields(fields);
+                            layoutBlocks.add(sectionBlockBuilder.build());
+                            sectionBlockBuilder = SectionBlock.builder();
+                            fields = new ArrayList<>();
+                        }
+
+                        MarkdownTextObjectBuilder mrkdwnTextObject = MarkdownTextObject.builder();
+                        String fieldText = idx + ". *<" + trend.getURL() + "|" + trend.getName() + ">*";
                         Integer tweetVolume = trend.getTweetVolume();
                         if (tweetVolume > 0) {
-                            attachmentBuilder.text("Tweet volume: " + tweetVolume);
-                        } else {
-                            attachmentBuilder.text("Tweet volume: undefined");
+                            fieldText += "\n" + tweetVolume;
                         }
-                        attachmentBuilder.title(trend.getName());
-                        attachmentBuilder.titleLink(trend.getURL());
-                        attachmentBuilder.color("#1da1f2");
-                        attachments.add(attachmentBuilder.build());
+                        mrkdwnTextObject.text(fieldText);
+                        fields.add(mrkdwnTextObject.build());
+
+                        idx++;
                     }
+                    sectionBlockBuilder.fields(fields);
+                    layoutBlocks.add(sectionBlockBuilder.build());
+
                 }
 
                 if (trendsList.size() > 0) {
                     // return trendsList;
-                    return attachments;
+                    return layoutBlocks;
                 }
             } catch (TwitterException e) {
                 result = "1";
@@ -135,7 +156,6 @@ public class GetTrends extends RuntimeAction<TwitterPlatform> {
      *
      * @param locationName the name of the location to search the WOEID
      */
-
     private Integer getWoeIdByLocationName(String locationName) {
         Twitter twitterService = this.runtimePlatform.getTwitterService();
         Integer woeid = -1;
