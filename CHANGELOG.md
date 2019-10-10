@@ -10,7 +10,7 @@ The changelog format is based on [Keep a Changelog](https://keepachangelog.com/e
 
 
 
-## [1.0.0] - 2019-10-09 
+## [1.0.0] - 2019-10-10 
 
 See the release notes [here](https://github.com/xatkit-bot-platform/xatkit-twitter-platform/releases).
 
