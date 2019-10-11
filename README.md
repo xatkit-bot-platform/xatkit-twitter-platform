@@ -6,7 +6,7 @@ Xatkit Twitter Platform
 [![Wiki Badge](https://img.shields.io/badge/doc-wiki-blue)](https://github.com/xatkit-bot-platform/xatkit-releases/wiki/Xatkit-Twitter-Platform)
 
 
-Send and receive messages from Twitter, and search or post Tweets.
+Send and receive messages from Twitter, and search or post Tweets. This platform is bundled with the [Xatkit release](https://github.com/xatkit-bot-platform/xatkit-releases/releases).
 
 ## Providers
 
