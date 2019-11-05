@@ -44,3 +44,6 @@ target
 
 # Bin scripts
 bin
+
+# Compiled platform XMI files
+platform/*.xmi
