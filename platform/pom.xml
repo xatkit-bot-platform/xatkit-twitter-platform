@@ -14,6 +14,18 @@
 
     <packaging>pom</packaging>
 
+	<dependencies>
+
+        <!-- Slack -->
+        <!-- Needs to be in the platform pom to be imported in the classpath by eclipse to enable editor completion -->
+
+		<dependency>
+            <groupId>com.github.seratch</groupId>
+            <artifactId>jslack</artifactId>
+        </dependency>
+
+	</dependencies>
+
     <profiles>
         <profile>
             <id>build-product</id>

@@ -16,7 +16,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <twitter4j.version>[4.0,)</twitter4j.version>
-        <jslack.version>1.7.2</jslack.version>
     </properties>
 
 
@@ -56,14 +55,6 @@
                 <groupId>org.twitter4j</groupId>
                 <artifactId>twitter4j-core</artifactId>
                 <version>${twitter4j.version}</version>
-            </dependency>
-
-            <!-- Slack -->
-
-            <dependency>
-                <groupId>com.github.seratch</groupId>
-                <artifactId>jslack</artifactId>
-                <version>${jslack.version}</version>
             </dependency>
 
         </dependencies>

@@ -16,12 +16,29 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
         <maven-help-plugin.version>3.2.0</maven-help-plugin.version>
+        <jslack.version>1.7.2</jslack.version>
     </properties>
 
     <modules>
         <module>runtime</module>
         <module>platform</module>
     </modules>
+
+    <dependencyManagement>
+
+        <dependencies>
+
+            <!-- Slack -->
+
+            <dependency>
+                <groupId>com.github.seratch</groupId>
+                <artifactId>jslack</artifactId>
+                <version>${jslack.version}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
 
     <build>
 
