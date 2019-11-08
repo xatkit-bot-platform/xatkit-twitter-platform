@@ -4,14 +4,14 @@ path "com.xatkit.plugins.twitter.platform.TwitterPlatform"
 
 actions {
 
-	PostAtweet(content)
-	LookForTweets(query)
-	LookForTweets(query, resultsPerPage)
-	SendDM(user,text)
-	ReceiveDM
-	ReceiveDM(messagesPerPage)
-	GetTrends
-	GetTrends(woeid)
-	GetTrends(locationName)
+	PostAtweet(content : String) 							: Integer
+	LookForTweets(query : String) 							: java.util.List<com.github.seratch.jslack.api.model.Attachment>
+	LookForTweets(query : String, resultsPerPage : Integer) : java.util.List<com.github.seratch.jslack.api.model.Attachment>
+	SendDM(user : String, text : String) 					: Integer
+	ReceiveDM 												: java.util.List<com.github.seratch.jslack.api.model.Attachment>
+	ReceiveDM(messagesPerPage : Integer) 					: java.util.List<com.github.seratch.jslack.api.model.Attachment>
+	GetTrends 												: java.util.List<com.github.seratch.jslack.api.model.Attachment>
+	GetTrends(woeid: Integer) 								: java.util.List<com.github.seratch.jslack.api.model.Attachment>
+	GetTrends(locationName: String) 						: String
 
 }

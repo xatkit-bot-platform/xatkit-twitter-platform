@@ -9,9 +9,6 @@
     </formats>
     <files>
         <file>
-            <source>TwitterPlatform.xmi</source>
-        </file>
-        <file>
             <source>TwitterPlatform.platform</source>
         </file>
     </files>
