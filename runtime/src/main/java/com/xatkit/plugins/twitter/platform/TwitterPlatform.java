@@ -50,7 +50,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void GetTrends(@NonNull StateContext context) {
         GetTrends action = new GetTrends(this, context);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -62,7 +62,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void GetTrends(@NonNull TwitterPlatform platform, @NonNull StateContext context, @NonNull Integer woeid) {
         GetTrends action = new GetTrends(this, context, woeid);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -76,7 +76,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void GetTrends(@NonNull StateContext context, @NonNull String locationName) {
         GetTrends action = new GetTrends(this, context, locationName);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -88,7 +88,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void LookForTweets(@NonNull StateContext context, @NonNull String query) {
         LookForTweets action = new LookForTweets(this, context, query);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -101,7 +101,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void LookForTweets(@NonNull StateContext context, @NonNull String query, @NonNull Integer resultsPerPage) {
         LookForTweets action = new LookForTweets(this, context, query, resultsPerPage);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -113,7 +113,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void PostAtweet(@NonNull StateContext context, String content) {
         PostAtweet action = new PostAtweet(this, context, content);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -124,7 +124,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void ReceiveDM(@NonNull StateContext context) {
         ReceiveDM action = new ReceiveDM(this, context);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -136,7 +136,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void ReceiveDM(@NonNull StateContext context, @NonNull Integer messagesPerPage) {
         ReceiveDM action = new ReceiveDM(this, context, messagesPerPage);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     /**
@@ -149,7 +149,7 @@ public class TwitterPlatform extends RuntimePlatform {
      */
     public void SendDM(@NonNull StateContext context, @NonNull String user, @NonNull String text) {
         SendDM action = new SendDM(this, context, user, text);
-        RuntimeActionResult result = executeRuntimeAction(action);
+        RuntimeActionResult result = action.call();
     }
 
     public Twitter getTwitterService() {
