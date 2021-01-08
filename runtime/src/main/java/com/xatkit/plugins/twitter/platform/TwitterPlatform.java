@@ -1,6 +1,6 @@
 package com.xatkit.plugins.twitter.platform;
 
-import com.xatkit.core.XatkitCore;
+import com.xatkit.core.XatkitBot;
 import com.xatkit.core.platform.RuntimePlatform;
 import com.xatkit.plugins.twitter.platform.action.PostAtweet;
 import com.xatkit.plugins.twitter.platform.action.SendDM;
@@ -32,8 +32,8 @@ public class TwitterPlatform extends RuntimePlatform {
      * 
      */
     @Override
-    public void start(XatkitCore xatkitCore, Configuration configuration) {
-        super.start(xatkitCore, configuration);
+    public void start(XatkitBot xatkitBot, Configuration configuration) {
+        super.start(xatkitBot, configuration);
         twitterService = TwitterFactory.getSingleton();
         twitterService.setOAuthConsumer(configuration.getString(TwitterUtils.TWITTER_CONSUMER_KEY),
                 configuration.getString(TwitterUtils.TWITTER_CONSUMER_SECRET));
