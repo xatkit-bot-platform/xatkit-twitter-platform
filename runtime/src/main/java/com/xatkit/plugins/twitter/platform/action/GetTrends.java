@@ -3,11 +3,11 @@ package com.xatkit.plugins.twitter.platform.action;
 import java.util.ArrayList;
 import java.util.List;
 import static fr.inria.atlanmod.commons.Preconditions.checkArgument;
-import static java.util.Objects.nonNull;
+import lombok.NonNull;
 
 import com.github.seratch.jslack.api.model.Attachment;
 import com.xatkit.core.platform.action.RuntimeAction;
-import com.xatkit.core.session.XatkitSession;
+import com.xatkit.execution.StateContext;
 import com.xatkit.plugins.twitter.platform.TwitterPlatform;
 
 import twitter4j.Location;
@@ -33,46 +33,46 @@ public class GetTrends extends RuntimeAction<TwitterPlatform> {
     private Integer woeid;
 
     /**
-     * Search the top worldwide trending topics {@link LookForTweets} action with the provided {@code runtimePlatform},
-     * {@code session}.
+     * Search the top worldwide trending topics {@link LookForTweets} action with the provided {@code platform},
+     * {@code context}.
      *
-     * @param runtimePlatform the {@link TwitterPlatform} containing the database to store the created property
-     * @param session         the {@link XatkitSession} associated to this action
+     * @param platform the {@link TwitterPlatform} containing this action
+     * @param context  the {@link StateContext} associated to this action
      */
-    public GetTrends(TwitterPlatform runtimePlatform, XatkitSession session) {
-        super(runtimePlatform, session);
+    public GetTrends(@NonNull TwitterPlatform platform, @NonNull StateContext context) {
+        super(platform, context);
         this.woeid = 1;
     }
 
     /**
-     * Search the top trending topics {@link GetTrends} action with the provided {@code runtimePlatform},
-     * {@code session} and {@code woeid}.
+     * Search the top trending topics {@link GetTrends} action with the provided {@code platform}, {@code context} and
+     * {@code woeid}.
      *
-     * @param runtimePlatform the {@link TwitterPlatform} containing the database to store the created property
-     * @param session         the {@link XatkitSession} associated to this action
-     * @param woeid           the woeid of the location to return trending information for
+     * @param platform the {@link TwitterPlatform} containing this action
+     * @param context  the {@link StateContext} associated to this action
+     * @param woeid    the woeid of the location to return trending information for
      */
-    public GetTrends(TwitterPlatform runtimePlatform, XatkitSession session, Integer woeid) {
-        super(runtimePlatform, session);
-        checkArgument(nonNull(woeid) && (woeid > 0),
+    public GetTrends(@NonNull TwitterPlatform platform, @NonNull StateContext context, @NonNull Integer woeid) {
+        super(platform, context);
+        checkArgument((woeid > 0),
                 "Cannot construct a %s action with the provided resultsPerPage %s, expected a non-null and greater than 0 integer",
                 this.getClass().getSimpleName(), woeid);
         this.woeid = woeid;
     }
 
     /**
-     * Search the top worldwide trending topics {@link GetTrends} action with the provided {@code runtimePlatform},
-     * {@code session} and {@code locationName}.
+     * Search the top worldwide trending topics {@link GetTrends} action with the provided {@code platform},
+     * {@code context} and {@code locationName}.
      * <p>
      * If no woeid is obtained for locationName, worldwide trends are returned.
      *
-     * @param runtimePlatform the {@link TwitterPlatform} containing the database to store the created property
-     * @param session         the {@link XatkitSession} associated to this action
-     * @param locationName    the name of the location, in english, to return trending information for.
+     * @param platform     the {@link TwitterPlatform} containing this action
+     * @param context      the {@link StateContext} associated to this action
+     * @param locationName the name of the location, in english, to return trending information for.
      */
-    public GetTrends(TwitterPlatform runtimePlatform, XatkitSession session, String locationName) {
-        super(runtimePlatform, session);
-        checkArgument(nonNull(locationName) && !locationName.isEmpty(),
+    public GetTrends(@NonNull TwitterPlatform platform, @NonNull StateContext context, @NonNull String locationName) {
+        super(platform, context);
+        checkArgument(!locationName.isEmpty(),
                 "Cannot construct a %s action with the provided locationName %s, expected a non-null and not empty String",
                 this.getClass().getSimpleName(), locationName);
 

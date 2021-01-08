@@ -13,8 +13,7 @@
     <artifactId>twitter-platform-runtime</artifactId>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <lombok.version>1.18.12</lombok.version>
         <twitter4j.version>[4.0,)</twitter4j.version>
     </properties>
 
@@ -28,14 +27,17 @@
 			<artifactId>twitter4j-core</artifactId>
        	</dependency>
 
-        <!-- Slack -->
+        <!-- Utils -->
 
         <dependency>
             <groupId>com.github.seratch</groupId>
             <artifactId>jslack</artifactId>
         </dependency>
 
-        <!-- Xatkit Internal -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.xatkit</groupId>
@@ -55,6 +57,15 @@
                 <groupId>org.twitter4j</groupId>
                 <artifactId>twitter4j-core</artifactId>
                 <version>${twitter4j.version}</version>
+            </dependency>
+
+            <!-- Utils -->
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
             </dependency>
 
         </dependencies>
