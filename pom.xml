@@ -21,7 +21,6 @@
 
     <modules>
         <module>runtime</module>
-        <module>platform</module>
     </modules>
 
     <dependencyManagement>
