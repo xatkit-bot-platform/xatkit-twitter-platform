@@ -2,17 +2,15 @@ package com.xatkit.plugins.twitter.platform;
 
 import com.xatkit.core.XatkitBot;
 import com.xatkit.core.platform.RuntimePlatform;
-import com.xatkit.plugins.twitter.platform.action.PostAtweet;
-import com.xatkit.plugins.twitter.platform.action.SendDM;
-import com.xatkit.plugins.twitter.platform.action.ReceiveDM;
-import com.xatkit.plugins.twitter.TwitterUtils;
-import com.xatkit.plugins.twitter.platform.action.LookForTweets;
-import com.xatkit.plugins.twitter.platform.action.GetTrends;
-import com.xatkit.execution.StateContext;
 import com.xatkit.core.platform.action.RuntimeActionResult;
-
+import com.xatkit.execution.StateContext;
+import com.xatkit.plugins.twitter.TwitterUtils;
+import com.xatkit.plugins.twitter.platform.action.GetTrends;
+import com.xatkit.plugins.twitter.platform.action.LookForTweets;
+import com.xatkit.plugins.twitter.platform.action.PostAtweet;
+import com.xatkit.plugins.twitter.platform.action.ReceiveDM;
+import com.xatkit.plugins.twitter.platform.action.SendDM;
 import lombok.NonNull;
-
 import org.apache.commons.configuration2.Configuration;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -23,13 +21,15 @@ import twitter4j.auth.AccessToken;
  */
 public class TwitterPlatform extends RuntimePlatform {
 
+    /**
+     * The {@link Twitter} service used to retrieve information and post messages on Twitter.
+     */
     private Twitter twitterService;
 
     /**
      * {@inheritDoc}
      * <p>
      * This method initializes the underlying {@link Twitter} service.
-     * 
      */
     @Override
     public void start(XatkitBot xatkitBot, Configuration configuration) {
@@ -45,10 +45,9 @@ public class TwitterPlatform extends RuntimePlatform {
     /**
      * Search the top worldwide trending topics {@link LookForTweets}.
      *
-     * @param platform the {@link TwitterPlatform} containing this action
-     * @param context  the {@link StateContext} associated to this action
+     * @param context the {@link StateContext} associated to this action
      */
-    public void GetTrends(@NonNull StateContext context) {
+    public void getTrends(@NonNull StateContext context) {
         GetTrends action = new GetTrends(this, context);
         RuntimeActionResult result = action.call();
     }
@@ -56,11 +55,10 @@ public class TwitterPlatform extends RuntimePlatform {
     /**
      * Search the top trending topics {@link GetTrends}.
      *
-     * @param platform the {@link TwitterPlatform} containing this action
-     * @param context  the {@link StateContext} associated to this action
-     * @param woeid    the woeid of the location to return trending information for
+     * @param context the {@link StateContext} associated to this action
+     * @param woeid   the woeid of the location to return trending information for
      */
-    public void GetTrends(@NonNull TwitterPlatform platform, @NonNull StateContext context, @NonNull Integer woeid) {
+    public void getTrends(@NonNull StateContext context, @NonNull Integer woeid) {
         GetTrends action = new GetTrends(this, context, woeid);
         RuntimeActionResult result = action.call();
     }
@@ -70,48 +68,44 @@ public class TwitterPlatform extends RuntimePlatform {
      * <p>
      * If no woeid is obtained for locationName, worldwide trends are returned.
      *
-     * @param platform     the {@link TwitterPlatform} containing this action
      * @param context      the {@link StateContext} associated to this action
      * @param locationName the name of the location, in english, to return trending information for.
      */
-    public void GetTrends(@NonNull StateContext context, @NonNull String locationName) {
+    public void getTrends(@NonNull StateContext context, @NonNull String locationName) {
         GetTrends action = new GetTrends(this, context, locationName);
         RuntimeActionResult result = action.call();
     }
 
     /**
-     * Seach for tweets {@link LookForTweets}.
+     * Search for tweets {@link LookForTweets}.
      *
-     * @param platform the {@link TwitterPlatform} containing this action
-     * @param context  the {@link StateContext} associated to this action
-     * @param query    the query to search for tweets
+     * @param context the {@link StateContext} associated to this action
+     * @param query   the query to search for tweets
      */
-    public void LookForTweets(@NonNull StateContext context, @NonNull String query) {
+    public void lookForTweets(@NonNull StateContext context, @NonNull String query) {
         LookForTweets action = new LookForTweets(this, context, query);
         RuntimeActionResult result = action.call();
     }
 
     /**
-     * Seach for tweets {@link LookForTweets} paginated.
+     * Search for tweets {@link LookForTweets} paginated.
      *
-     * @param platform       the {@link TwitterPlatform} containing this action
      * @param context        the {@link StateContext} associated to this action
      * @param query          the query to search for tweets
      * @param resultsPerPage the number of tweets to return per page
      */
-    public void LookForTweets(@NonNull StateContext context, @NonNull String query, @NonNull Integer resultsPerPage) {
+    public void lookForTweets(@NonNull StateContext context, @NonNull String query, @NonNull Integer resultsPerPage) {
         LookForTweets action = new LookForTweets(this, context, query, resultsPerPage);
         RuntimeActionResult result = action.call();
     }
 
     /**
-     * Post a new tweet {@link PostATweet}.
+     * Post a new tweet {@link PostAtweet}.
      *
-     * @param platform the {@link TwitterPlatform} containing this action
-     * @param context  the {@link StateContext} associated to this action
-     * @param content  the content of the tweet to post
+     * @param context the {@link StateContext} associated to this action
+     * @param content the content of the tweet to post
      */
-    public void PostAtweet(@NonNull StateContext context, String content) {
+    public void postAtweet(@NonNull StateContext context, String content) {
         PostAtweet action = new PostAtweet(this, context, content);
         RuntimeActionResult result = action.call();
     }
@@ -119,10 +113,9 @@ public class TwitterPlatform extends RuntimePlatform {
     /**
      * Shows the latest incoming direct menssages {@link ReceiveDM}.
      *
-     * @param platform the {@link TwitterPlatform} containing this action
-     * @param context  the {@link StateContext} associated to this action
+     * @param context the {@link StateContext} associated to this action
      */
-    public void ReceiveDM(@NonNull StateContext context) {
+    public void receiveDM(@NonNull StateContext context) {
         ReceiveDM action = new ReceiveDM(this, context);
         RuntimeActionResult result = action.call();
     }
@@ -130,11 +123,10 @@ public class TwitterPlatform extends RuntimePlatform {
     /**
      * Shows the latest incoming direct menssages {@link ReceiveDM} paginated.
      *
-     * @param platform        the {@link TwitterPlatform} containing this action
      * @param context         the {@link StateContext} associated to this action
      * @param messagesPerPage the number of messages to retrieve per page
      */
-    public void ReceiveDM(@NonNull StateContext context, @NonNull Integer messagesPerPage) {
+    public void receiveDM(@NonNull StateContext context, @NonNull Integer messagesPerPage) {
         ReceiveDM action = new ReceiveDM(this, context, messagesPerPage);
         RuntimeActionResult result = action.call();
     }
@@ -142,16 +134,20 @@ public class TwitterPlatform extends RuntimePlatform {
     /**
      * Sends a direct messaage to a user {@link SendDM}.
      *
-     * @param platform the {@link TwitterPlatform} containing this action
-     * @param context  the {@link StateContext} associated to this action
-     * @param user     the user to send the message
-     * @param text     the contentof the message
+     * @param context the {@link StateContext} associated to this action
+     * @param user    the user to send the message
+     * @param text    the contentof the message
      */
-    public void SendDM(@NonNull StateContext context, @NonNull String user, @NonNull String text) {
+    public void sendDM(@NonNull StateContext context, @NonNull String user, @NonNull String text) {
         SendDM action = new SendDM(this, context, user, text);
         RuntimeActionResult result = action.call();
     }
 
+    /**
+     * Returns the internal {@link Twitter} service.
+     *
+     * @return the internal {@link Twitter} service
+     */
     public Twitter getTwitterService() {
         return this.twitterService;
     }
