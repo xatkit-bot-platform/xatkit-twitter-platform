@@ -21,7 +21,7 @@ public class PostAtweet extends RuntimeAction<TwitterPlatform> {
     private String content;
 
     /**
-     * Post a new tweet {@link PostATweet} action with the provided {@code platform}, {@code context},
+     * Post a new tweet {@link PostAtweet} action with the provided {@code platform}, {@code context},
      * {@code content}.
      *
      * @param platform the {@link TwitterPlatform} containing this action

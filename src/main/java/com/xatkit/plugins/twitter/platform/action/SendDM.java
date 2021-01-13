@@ -14,20 +14,25 @@ import twitter4j.TwitterException;
  * This class relies on the {@link TwitterPlatform}'s {@link twitter4j.Twitter} to integrate with twitter.
  */
 public class SendDM extends RuntimeAction<TwitterPlatform> {
+
     /**
-     * The inputs for the DM.
+     * The content of the direct message to send.
      */
     private String text;
+
+    /**
+     * The user to send a direct message to.
+     */
     private String user;
 
     /**
-     * Sends a direct messaage to a user {@link SendDM} action with the provided {@code platform}, {@code context},
+     * Sends a direct message to a user {@link SendDM} action with the provided {@code platform}, {@code context},
      * {@code user}, {@code text}.
      *
      * @param platform the {@link TwitterPlatform} containing this action
      * @param context  the {@link StateContext} associated to this action
      * @param user     the user to send the message
-     * @param text     the contentof the message
+     * @param text     the content of the message
      */
     public SendDM(@NonNull TwitterPlatform platform, @NonNull StateContext context, @NonNull String user,
             @NonNull String text) {
@@ -39,7 +44,7 @@ public class SendDM extends RuntimeAction<TwitterPlatform> {
     /**
      * Sends a Direct Message to a user whose username is {@code user}. The content of the message is {@code text}.
      * <p>
-     * 
+     *
      * @return 0 if no errors; 1 if errors
      */
     @Override
