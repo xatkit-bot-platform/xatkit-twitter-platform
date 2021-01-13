@@ -3,9 +3,7 @@ package com.xatkit.plugins.twitter.platform.action;
 import com.xatkit.core.platform.action.RuntimeAction;
 import com.xatkit.execution.StateContext;
 import com.xatkit.plugins.twitter.platform.TwitterPlatform;
-
 import lombok.NonNull;
-
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 

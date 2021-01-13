@@ -64,8 +64,8 @@ public class ReceiveDM extends RuntimeAction<TwitterPlatform> {
                      @NonNull Integer messagesPerPage) {
         super(platform, context);
         checkArgument((messagesPerPage > 0) && (messagesPerPage <= MAX_MESSAGES_PER_PAGE), "Cannot construct a %s "
-                        + "action with the provided messagesPerPage %s, expected a non-null, greater than 0 and less "
-                        + "than or equal to 50 integer", this.getClass().getSimpleName(), messagesPerPage);
+                + "action with the provided messagesPerPage %s, expected a non-null, greater than 0 and less "
+                + "than or equal to 50 integer", this.getClass().getSimpleName(), messagesPerPage);
         this.messagesPerPage = messagesPerPage;
     }
 

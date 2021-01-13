@@ -3,7 +3,6 @@ package com.xatkit.plugins.twitter.platform.action;
 import com.xatkit.core.platform.action.RuntimeAction;
 import com.xatkit.execution.StateContext;
 import com.xatkit.plugins.twitter.platform.TwitterPlatform;
-
 import lombok.NonNull;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -35,7 +34,7 @@ public class SendDM extends RuntimeAction<TwitterPlatform> {
      * @param text     the content of the message
      */
     public SendDM(@NonNull TwitterPlatform platform, @NonNull StateContext context, @NonNull String user,
-            @NonNull String text) {
+                  @NonNull String text) {
         super(platform, context);
         this.text = text;
         this.user = user;
